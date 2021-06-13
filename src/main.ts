@@ -39,7 +39,7 @@ async function bootstrap() {
   // Initialize the firebase admin app
   admin.initializeApp({
     credential: admin.credential.cert(adminConfig),
-    databaseURL: "https://xxxxx.firebaseio.com",
+    databaseURL: "https://insat-events-default-rtdb.firebaseio.com/",
   });
 
   app.useGlobalPipes(
