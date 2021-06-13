@@ -1,4 +1,4 @@
-import {ApiBadRequestResponse, ApiBody, ApiConsumes, ApiTags} from "@nestjs/swagger";
+import {ApiBadRequestResponse, ApiBody, ApiConsumes, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {
     Controller,
     Get,
@@ -34,11 +34,13 @@ export class FilesController {
             },
         },
     })
+    @ApiResponse({status:200, description: 'return the file id'})
     @UseInterceptors(FileInterceptor('file'))
     async uploadFile(
         @UploadedFile() file: DiskFile,
     ): Promise<any> {
         const createdFile = await this.filesService.writeFile(file);
+        return {fileId: createdFile._id};
 
     }
 

@@ -18,8 +18,8 @@ export class ClubController {
 
   @Post()
   @ApiBody({type: NewClubDto})
-  async addClub(@Body('name') clubName: string) {
-    const generatedId = await this.clubService.insertClub(clubName);
+  async addClub(@Body() club: NewClubDto) {
+    const generatedId = await this.clubService.insertClub(club);
     return { id: generatedId };
   }
 

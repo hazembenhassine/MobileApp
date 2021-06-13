@@ -1,4 +1,6 @@
 import * as mongoose from 'mongoose';
+import {Types} from "mongoose";
+import {Club} from "../club/club.model";
 
 export const EventSchema = new mongoose.Schema({
     title: {
@@ -31,6 +33,14 @@ export const EventSchema = new mongoose.Schema({
         ],
         required: true,
     },
+    organizers: [{
+        type: Types.ObjectId,
+        ref: 'Club'
+    }],
+    coverImageId: {
+        type: String,
+        required: true,
+    },
 });
 
 export interface Events extends mongoose.Document {
@@ -40,4 +50,6 @@ export interface Events extends mongoose.Document {
     date: string;
     place: string;
     category: string;
+    organizers: Club[];
+    coverImageId: string;
 }

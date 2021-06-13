@@ -2,14 +2,16 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Club } from './club.model';
+import {NewClubDto} from "./dto/new-club.dto";
 
 @Injectable()
 export class ClubService {
   constructor(@InjectModel('Club') private readonly clubModel: Model<Club>) {}
 
-  async insertClub(name: string) {
+  async insertClub(club: NewClubDto) {
     const newClub = new this.clubModel({
-      name,
+      name: club.name,
+      logoImageId: club.logoImageId,
     });
     const result = await newClub.save();
     return result.id as string;
@@ -20,6 +22,7 @@ export class ClubService {
     return clubs.map((club) => ({
       id: club.id,
       name: club.name,
+      logoImageId: club.logoImageId
     }));
   }
 
@@ -28,6 +31,7 @@ export class ClubService {
     return {
       id: club.id,
       name: club.name,
+      logoImageId: club.logoImageId
     };
   }
 

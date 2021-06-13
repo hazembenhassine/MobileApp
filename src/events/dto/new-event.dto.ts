@@ -11,6 +11,11 @@ export class NewEventDto {
     @IsString()
     @IsNotEmpty()
     @ApiProperty({ type: String, required: true })
+    coverImageId: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @ApiProperty({ type: String, required: true })
     description: string;
 
     @IsString()
@@ -33,4 +38,8 @@ export class NewEventDto {
     @IsEnum(Category)
     @ApiProperty({ enum: Category, required: true })
     category: string;
+
+    @IsNotEmpty()
+    @ApiProperty({ type: [String], required: true })
+    organizers: string[];
 }

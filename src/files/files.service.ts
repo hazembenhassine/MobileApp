@@ -3,6 +3,7 @@ import {IGridFSWriteOption, MongoGridFS} from "mongo-gridfs";
 import {InjectConnection} from "@nestjs/mongoose";
 import {Connection, Types} from "mongoose";
 import {GridFSBucketReadStream} from "mongodb";
+import {log} from "util";
 
 @Injectable()
 export class FilesService {

@@ -3,6 +3,7 @@ import { EventsService } from './events.service';
 import {NewEventDto} from "./dto/new-event.dto";
 import {UpdateEventDto} from "./dto/update-event.dto";
 import {ApiTags} from "@nestjs/swagger";
+import {FilterEventsDto} from "./dto/filter-events.dto";
 
 @ApiTags('Events')
 @Controller('events')
@@ -22,12 +23,17 @@ export class EventsController {
   }
 
   @Get(':id')
-  getClub(@Param('id') eventId: string) {
+  getEvent(@Param('id') eventId: string) {
     return this.eventService.getSingleEvent(eventId);
   }
 
+  @Post('/filter')
+  getFilteredEvents(@Body() filter: FilterEventsDto) {
+    return this.eventService.getFilteredEvents(filter);
+  }
+
   @Patch(':id')
-  async updateClub(
+  async updateEvent(
       @Param('id') eventId: string,
       @Body() event: UpdateEventDto,
   ) {
@@ -36,7 +42,7 @@ export class EventsController {
   }
 
   @Delete(':id')
-  async removeClub(@Param('id') eventId: string) {
+  async removeEvent(@Param('id') eventId: string) {
     await this.eventService.deleteEvent(eventId);
     return null;
   }

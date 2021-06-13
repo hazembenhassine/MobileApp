@@ -1,14 +1,14 @@
-import {IsNotEmpty, IsString} from "class-validator";
+import {IsOptional, IsString} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
-export class NewClubDto {
+export class FilterEventsDto {
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     @ApiProperty({ type: String, required: true })
-    name: string;
+    club: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     @ApiProperty({ type: String, required: true })
-    logoImageId: string;
+    date: string;
 }
